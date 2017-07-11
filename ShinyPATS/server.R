@@ -29,8 +29,22 @@ shinyServer(function(input, output) {
 #		updateSelectInput(input, "assetNum", choices= c(1,2,3))
 #		})
 	output$assetInput <- renderUI({
-		projInd <- which(sapply(index$projects, function(x) x$label==input$projectNum))
-		currentProjAssets <- sapply(index$projects[[projInd]]$assets, function(x) x$label)
+		projInd <- which(sapply(
+				index$projects, 
+				function(x) x$label==input$projectNum
+				))
+		currentProjAssets <- sapply(
+					index$projects[[projInd]]$assets, 
+					function(x) x$label
+					)
+		names(currentProjAssets) <- paste(
+				currentProjAssets,
+				sapply(
+					index$projects[[projInd]]$assets, 
+					function(x) x$name
+					),
+				sep= " -- "
+				)
 		selectInput("assetNum", "Asset Number:", currentProjAssets)
 	})
 })
