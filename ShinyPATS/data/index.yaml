@@ -1,0 +1,26 @@
+data: ~
+projects:
+- name: lv3.0-airframe
+  label: '0001'
+  assets:
+  - label: '0001'
+    name: 18 inch module
+  - label: '0002'
+    name: 24 inch module
+  - label: '0003'
+    name: nosecone
+- name: 'rv3k '
+  label: '0002'
+  assets: []
+- name: 'gps '
+  label: '0003'
+  assets: []
+- name: eNSR
+  label: '0004'
+  assets:
+  - label: '0001'
+    name: brushless DC motor
+  - label: '0002'
+    name: wave spring
+  - label: '0003'
+    name: rails

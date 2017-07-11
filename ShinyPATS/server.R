@@ -1,4 +1,4 @@
-#
+# server.R
 # This is the server logic of a Shiny web application. You can run the 
 # application by clicking 'Run App' above.
 #
@@ -23,4 +23,14 @@ shinyServer(function(input, output) {
 			      sep="-"
 			      )
 		})
+#	output$projAssets <- reactive({
+#		projInd <- which(sapply(index$projects, function(x) x$label==input$projectNum))
+#		currentProjAssets <- sapply(index$projects[[projInd]]$assets, function(x) x$label)
+#		updateSelectInput(input, "assetNum", choices= c(1,2,3))
+#		})
+	output$assetInput <- renderUI({
+		projInd <- which(sapply(index$projects, function(x) x$label==input$projectNum))
+		currentProjAssets <- sapply(index$projects[[projInd]]$assets, function(x) x$label)
+		selectInput("assetNum", "Asset Number:", currentProjAssets)
+	})
 })

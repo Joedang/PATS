@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+source("global.R")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -17,8 +18,10 @@ shinyUI(fluidPage(
 		src = "psas_insignia.svg"
 		),
 	titlePanel("PSAS Asset Tracking System"),
-	selectInput("projectNum", "Project Number:", c(1,2,3)),
-	selectInput("assetNum", "Asset Number:", c(1,2,3)),
+	tags$h3("Asset label:", textOutput("baseLabel")),
+	selectInput("projectNum", "Project Number:", projNums),
+# 	selectInput("assetNum", "Asset Number:", c()),
+	uiOutput("assetInput"),
 	textInput("labelExt", "Label Extension:"),
 	textInput("assetName", "Asset Name:"),
 	textInput("yourName", "Your name:"),
@@ -31,6 +34,5 @@ shinyUI(fluidPage(
 		    	other= c("other")
 		    	)
 		    ),
-	textAreaInput("message", "Message:"),
-	textOutput("baseLabel")
+	textAreaInput("message", "Message:")
 ))
