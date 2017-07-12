@@ -28,23 +28,50 @@ shinyServer(function(input, output) {
 #		currentProjAssets <- sapply(index$projects[[projInd]]$assets, function(x) x$label)
 #		updateSelectInput(input, "assetNum", choices= c(1,2,3))
 #		})
-	output$assetInput <- renderUI({
+	output$assetNumInput <- renderUI({
+		# find the index of the project with the given label:
 		projInd <- which(sapply(
 				index$projects, 
 				function(x) x$label==input$projectNum
 				))
+		# get a vector of the labels of the assets in this project:
 		currentProjAssets <- sapply(
 					index$projects[[projInd]]$assets, 
 					function(x) x$label
 					)
+		# name the elements of that vector "#### -- ASSET NAME"
 		names(currentProjAssets) <- paste(
 				currentProjAssets,
-				sapply(
+				sapply( # get the names of the assets
 					index$projects[[projInd]]$assets, 
 					function(x) x$name
 					),
 				sep= " -- "
 				)
+		# display this named vector as a drop down
 		selectInput("assetNum", "Asset Number:", currentProjAssets)
 	})
+	output$assetNameInput <- renderUI({
+
+		# find the index of the project with the given label:
+		projInd <- which(sapply(
+				index$projects, 
+				function(x) x$label==input$projectNum
+				))
+
+		# get a T/F mask of which assets match the asset number:
+		assetMask <- sapply(index$projects[[projInd]]$assets, function(x) x$label==input$assetNum)
+		# if you got a match, get it's name. Otherwise, give it an empty name.
+		if (typeof(assetMask)=="logical") {
+			assetInd <- which(assetMask)
+			currentAssetName <- index$projects[[projInd]]$assets[[assetInd]]$name
+		} else 
+			currentAssetName <- ""
+
+		textInput(
+			  "assetName", "Asset Name:", 
+			  value= currentAssetName
+			  )
+	})
+
 })
