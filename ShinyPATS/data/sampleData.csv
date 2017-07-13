@@ -1,4 +1,4 @@
-Timestamp,Project Number,Asset Number,Asset name,Label Extension,Your name,Date of event,event type,Message
+timestamp,project number,asset number,asset name,label extension,your name,date of event,event type,message
 7/1/2017 0:11:25,0019,0001,THingy,,Risto,6/30/2017,incident,Something happened
 7/9/2017 15:59:28,0000,0001,canteen,,Joe Shields,,creation,Bought a 500 ml bottle off of Amazon.
 7/9/2017 16:00:41,0000,0001,water bottle,,Joseph Sheidls,,service,filled with water

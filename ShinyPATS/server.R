@@ -9,41 +9,38 @@
 
 library(shiny)
 
-# Define server logic required to draw a histogram
+# function to find the index of the project with the given label:
+projInd <- function(input) 
+{
+	which(sapply(
+		index$projects, 
+		function(x) x$label==input$projectNum
+	))
+}
+
 shinyServer(function(input, output) {
-	output$baseLabel <- reactive({
-		if (nchar(input$labelExt)==0)
-			paste(
-				"PSAS", input$projectNum, 
-				input$assetNum, sep="-"
-				)
+
+	# generate the PATS label based on user input
+	output$label <- reactive({
+		lab <- paste("PSAS", input$projectNum, input$assetNum, sep="-")
+		# if the extension isn't empty, add it on, else use the base label
+		if (nchar(input$labelExt)!=0)
+			paste(lab, input$labelExt, sep="-")
 		else
-			paste("PSAS", input$projectNum, 
-			      input$assetNum, input$labelExt, 
-			      sep="-"
-			      )
+			lab
 		})
-#	output$projAssets <- reactive({
-#		projInd <- which(sapply(index$projects, function(x) x$label==input$projectNum))
-#		currentProjAssets <- sapply(index$projects[[projInd]]$assets, function(x) x$label)
-#		updateSelectInput(input, "assetNum", choices= c(1,2,3))
-#		})
+	
+	# generate the asset number dropdown based on the project number dropdown
 	output$assetNumInput <- renderUI({
-		# find the index of the project with the given label:
-		projInd <- which(sapply(
-				index$projects, 
-				function(x) x$label==input$projectNum
-				))
-		# get a vector of the labels of the assets in this project:
 		currentProjAssets <- sapply(
-					index$projects[[projInd]]$assets, 
+					index$projects[[projInd(input)]]$assets, 
 					function(x) x$label
 					)
 		# name the elements of that vector "#### -- ASSET NAME"
 		names(currentProjAssets) <- paste(
 				currentProjAssets,
 				sapply( # get the names of the assets
-					index$projects[[projInd]]$assets, 
+					index$projects[[projInd(input)]]$assets, 
 					function(x) x$name
 					),
 				sep= " -- "
@@ -51,27 +48,41 @@ shinyServer(function(input, output) {
 		# display this named vector as a drop down
 		selectInput("assetNum", "Asset Number:", currentProjAssets)
 	})
+
+	# generate the auto-filled asset name based on the project and asset dropdowns
 	output$assetNameInput <- renderUI({
-
-		# find the index of the project with the given label:
-		projInd <- which(sapply(
-				index$projects, 
-				function(x) x$label==input$projectNum
-				))
-
 		# get a T/F mask of which assets match the asset number:
-		assetMask <- sapply(index$projects[[projInd]]$assets, function(x) x$label==input$assetNum)
+		assetMask <- sapply(index$projects[[projInd(input)]]$assets, function(x) x$label==input$assetNum)
 		# if you got a match, get it's name. Otherwise, give it an empty name.
 		if (typeof(assetMask)=="logical") {
 			assetInd <- which(assetMask)
-			currentAssetName <- index$projects[[projInd]]$assets[[assetInd]]$name
+			currentAssetName <- index$projects[[projInd(input)]]$assets[[assetInd]]$name
 		} else 
 			currentAssetName <- ""
 
+		# return the UI element for the dropdown
 		textInput(
 			  "assetName", "Asset Name:", 
 			  value= currentAssetName
 			  )
 	})
 
+	# display the database as a table
+	output$dataTable <- renderDataTable({
+			input$submit # this just makes the table reactive to the submit button
+			subset(loadData(), select= -message)
+		})
+	output$indexTable <- renderDataTable({index})
+
+	output$submitRefresh <- renderUI({
+		if (input$submit > 0) 
+		{
+			saveData()
+			HTML("<script>location.reload()</script>")
+		}
+	})
+
+# 	output$debugTable <- renderDataTable({
+# 		input
+# 	})
 })

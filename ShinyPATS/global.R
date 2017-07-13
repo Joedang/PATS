@@ -5,6 +5,56 @@ index <- yaml.load_file("data/index.yaml")
 projNums <- sapply(index$projects, function(x) x$label)
 names(projNums) <- sapply(index$projects, function(x) x$name)
 
+loadData <- function()
+{
+	read.csv("data/sampleData.csv")
+}
+
+saveData <- function()
+{}
+
+updateIndex <- function(dat, index)
+{
+
+	projects <- levels(as.factor(dat$asset.number[which(dat$project.number == prj$label)]))
+	l <- list()
+	for (prj in projects)
+	{
+
+	}
+	
+	return(newind)
+}
+
+# df2nested <- function(dat, hier)
+# {
+# 	lev <- levels(as.factor(dat[[heir[0]]]))
+# 	l <- list()
+# 	names(l) <- rep(heir[1], length(l))
+# }
+
+# printElem <- function(l, n=0)
+# {
+# 	out <- NULL
+# 	if (typeof(l)=="list" && length(l)>0)
+# 	{
+# 		cat("names of l: \n", names(l), "\n")
+# 		for (i in 1:length(l))
+# 		{
+# 			out <- paste(sep="", 
+# 				      out, 
+# 				      rep("  ", n), names(l)[i], "\n",
+# 				      rep("  ", n+1), printElem(l[[i]], n+1), "\n"
+# 			      )
+# 		}
+# 	} else {
+# 
+# 		cat(names(l), ": ", l, "\n")
+# 		out <- l
+# 	}
+# 	return(out)
+# }
+
 # lookupProj <- function(pnum, input){
 # 	projInd <- which(sapply(
 # 			index$projects, 

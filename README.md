@@ -15,11 +15,11 @@ What I mean by "pathological inputs" is this... Say my data storage format uses 
 Kenny advises that I don't store stuff as YAML, which seems like sound advice. I dunno if there's a good web service for hosting MySQL databases... I don't really want to store it in a Google sheet, lol. That kind of has similar problems to YAML, in that someone could accidentally edit it.
 
 ## TODO:
-- [ ] standardize the naming of variables!
+- [X] standardize the naming of variables!
 - [ ] implement loadData() and saveData() functions. For now, these can just interface with a CSV. Later on, I'll swap those functions out for ones that interface with an SQL database or something. 
 - [ ] Setup the sample index to include label extensions
-- [ ] auto-fill the label extension
-- [ ] implement a submit button
-- [ ] put the form into a tab
-- [ ] make a tab for monitoring the data and another for the index
+- [ ] auto-fill the label extension based on what's in the index
+- [X] implement a submit button
+- [X] put the form into a tab
+- [X] make a tab for monitoring the data and another for the index
 - [ ] implement a function that reads through the data to generate an index

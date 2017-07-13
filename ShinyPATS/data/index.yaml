@@ -5,10 +5,13 @@ projects:
   assets:
   - label: '0001'
     name: 18 inch module
+    extension:
   - label: '0002'
     name: 24 inch module
+    extension:
   - label: '0003'
     name: nosecone
+    extension:
 - name: 'rv3k '
   label: '0002'
   assets: []
@@ -20,7 +23,10 @@ projects:
   assets:
   - label: '0001'
     name: brushless DC motor
+    extension:
   - label: '0002'
     name: wave spring
+    extension:
   - label: '0003'
     name: rails
+    extension:
