@@ -5,14 +5,14 @@ index <- yaml.load_file("data/index.yaml")
 projNums <- sapply(index$projects, function(x) x$label)
 names(projNums) <- sapply(index$projects, function(x) x$name)
 
-loadData <- loadData_csv
-saveData <- saveData_csv
-
 loadData_csv <- function() read.csv("data/sampleData.csv")
 
 saveData_csv <- function(data) {
 # take the data frame and save it to a CSV
 }
+
+loadData <- loadData_csv
+saveData <- saveData_csv
 
 appendData <- function(data){
 # take the data frame and append the new data from the fields of the form

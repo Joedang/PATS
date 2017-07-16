@@ -14,6 +14,20 @@ What I mean by "pathological inputs" is this... Say my data storage format uses 
 
 Kenny advises that I don't store stuff as YAML, which seems like sound advice. I dunno if there's a good web service for hosting MySQL databases... I don't really want to store it in a Google sheet, lol. That kind of has similar problems to YAML, in that someone could accidentally edit it.
 
+## How to Setup
+
+Right now, all you really need is R.  
+From the R console: 
+```R
+install.packages("shiny")
+library("shiny")
+setwd("YOUR_PATH/PATS/ShinyPATS") # YOUR_PATH is wherever you cloned this repo to
+runApp()
+```
+This will start the R server and tell you what port to find it on. 
+If it doesn't open a tab in your browser automatically (takes a few seconds), just go to `localhost:####`, where `####` is the port it tells you. 
+Use `^C` from the R console to stop the server.
+
 ## TODO:
 - [X] standardize the naming of variables!
 - [X] implement loadData() and saveData() functions. For now, these can just interface with a CSV. Later on, I'll swap those functions out for ones that interface with an SQL database or something. 
