@@ -1,32 +1,19 @@
-data: ~
+data:
+- ~
 projects:
-- name: lv3.0-airframe
-  label: '0001'
+- label: '0000'
+  name: lv3.0-airframe
   assets:
   - label: '0001'
-    name: 18 inch module
-    extension:
+    extension: ~
+    name: bottle
   - label: '0002'
-    name: 24 inch module
-    extension:
-  - label: '0003'
-    name: nosecone
-    extension:
-- name: 'rv3k '
-  label: '0002'
-  assets: []
-- name: 'gps '
-  label: '0003'
-  assets: []
-- name: eNSR
-  label: '0004'
+    extension: ~
+    name: sad junk
+- label: 0019
+  name: example
   assets:
   - label: '0001'
-    name: brushless DC motor
-    extension:
-  - label: '0002'
-    name: wave spring
-    extension:
-  - label: '0003'
-    name: rails
-    extension:
+    extension: ~
+    name: THingy
+

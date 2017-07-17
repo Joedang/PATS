@@ -27,18 +27,18 @@ shinyUI(fluidPage(
 		tags$h3("Asset label:", textOutput("label")),
 
 		# dropdown of projects
-		selectInput("projectNum", "Project Number:", projNums),
+		selectInput("projectNum", "Project:", projNums),
 
 		# dynamic dropdown of assets
 		# selectInput("assetNum", "Asset Number:", c()),
-		uiOutput("assetNumInput"),
+		uiOutput("assetNumInput"), # assetNum
 
 		# label extension
 		textInput("labelExt", "Label Extension:"),
 
 		# asset name (auto-filled)
 		# textInput("assetName", "Asset Name:"),
-		uiOutput("assetNameInput"),
+		uiOutput("assetNameInput"), # assetName
 
 		# name of submitter
 		textInput("yourName", "Your name:"),

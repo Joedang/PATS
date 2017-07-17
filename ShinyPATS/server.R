@@ -70,15 +70,30 @@ shinyServer(function(input, output) {
 	# display the database as a table
 	output$dataTable <- renderDataTable({
 			input$submit # this just makes the table reactive to the submit button
-			subset(loadData(), select= -message)
+			subset(dat, select= -message)
 		})
 	output$indexTable <- renderDataTable({index})
 
 	output$submitRefresh <- renderUI({
 		if (input$submit > 0) 
 		{
-			saveRDS(input$date, "dateSample.RData")
-			saveData()
+			# saveRDS(input$date, "dateSample.RData")
+			# if (!grep("^[0-9][4]", input$projectNum)) # check that a good proj number leads
+			# 	warning("The project label seems to have a bad format.\n", input$projectNum)
+			data_proj <- data.frame(
+						project.number= input$projectNum,
+						asset.number= input$assetNum,
+						extension= input$labelExt,
+						asset.name= input$assetName,
+						submitter= input$yourName,
+						date= input$date,
+						type= input$eventType,
+						message= input$message,
+						timestamp= Sys.time()
+						)
+			dat <<- rbind(dat, data_proj) # UPDATE THE GLOBAL VARIABLE `dat` (ooh, so naughty!)
+			cat("SAVING THE DATA!\n")
+			saveData(dat)
 			HTML("<script>location.reload()</script>")
 		}
 	})
