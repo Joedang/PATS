@@ -77,6 +77,7 @@ shinyServer(function(input, output) {
 	output$submitRefresh <- renderUI({
 		if (input$submit > 0) 
 		{
+			saveRDS(input$date, "dateSample.RData")
 			saveData()
 			HTML("<script>location.reload()</script>")
 		}

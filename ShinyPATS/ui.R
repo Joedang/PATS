@@ -44,7 +44,7 @@ shinyUI(fluidPage(
 		textInput("yourName", "Your name:"),
 
 		# date of event
-		dateInput("eventDate", "Date of event:"),	
+		dateInput("date", "Date of event:"),	
 
 		# event type dropdown
 		selectInput("eventType", "Event Type:", 
