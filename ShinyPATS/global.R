@@ -1,5 +1,6 @@
 # global.R
 library("yaml")
+source("functions.R")
 
 index <- yaml.load_file("data/index.yaml")
 projNums <- sapply(index$projects, function(x) x$label)
